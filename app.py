@@ -29,7 +29,9 @@ def tree():
 def dir_tree(dir, root):
     p = Path(dir)
     tree = { "name" : str(p.name), "path" : str(p.relative_to(root)) }
-    tree["children"] = [ dir_tree(str(x), root) for x in p.iterdir() if x.is_dir() ]
+    children = [ dir_tree(str(x), root) for x in p.iterdir() if x.is_dir() ]
+    children.sort(key=lambda c: c["name"])
+    tree["children"] = children
     return tree
 
 
