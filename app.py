@@ -35,8 +35,7 @@ def list_photos(path):
         "photo" : f"/photo/{str(p)}",
         "thumbnail" : f"/thumbnail/{str(p)}"
     }, sorted(photos)))
-    dic = { "path" : path, "photos" : photos }
-    return dic
+    return { "path" : path, "photos" : photos }
 
 
 @route("/photo/<filepath:path>")
