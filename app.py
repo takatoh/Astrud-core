@@ -11,6 +11,8 @@ MimeTypes = {
     ".gif" : "image/gif"
 }
 
+ThumbnailSize = (180, 180)
+
 with open("config.json", "r") as f:
     Config = json.load(f)
 
@@ -64,7 +66,7 @@ def dir_tree(dir, root):
 def make_thumbnail(photo_path, thumb_path):
     if not Path(thumb_path).exists():
         with Image.open(photo_path) as im:
-            im.thumbnail((180, 180))
+            im.thumbnail(ThumbnailSize)
             im.save(thumb_path)
         return thumb_path
     else:
