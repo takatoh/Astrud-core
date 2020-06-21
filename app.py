@@ -20,7 +20,7 @@ def config():
 @route("/tree")
 def tree():
     tree = dir_tree(Config["photoDir"])
-    return json.dumps(tree, indent=2)
+    return tree
 
 
 def dir_tree(root):
