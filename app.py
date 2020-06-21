@@ -1,4 +1,4 @@
-from bottle import route, run
+from bottle import route, static_file, run
 import json
 from pathlib import Path
 
@@ -24,6 +24,11 @@ def list_photos(path):
     photos.sort()
     dic = { "path" : path, "photos" : photos }
     return dic
+
+
+@route("/photo/<filepath:path>")
+def send_photo(filepath):
+    return static_file(filepath, root=Config["photoDir"], mimetype="image/jpeg")
 
 
 def dir_tree(dir, root):
