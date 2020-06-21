@@ -28,6 +28,7 @@ def tree():
 def list_photos(path):
     photo_dir = Config["photoDir"]
     p = Path(photo_dir) / path
+    make_thumbnails(str(p))
     photos = [ str(x.relative_to(photo_dir)) for x in p.iterdir() if x.is_file() ]
     photos.sort()
     dic = { "path" : path, "photos" : photos }
