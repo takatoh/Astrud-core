@@ -20,7 +20,10 @@ def config():
 @route("/tree")
 def tree():
     tree = dir_tree(Config["photoDir"], Config["photoDir"])
+    tree["name"] = None
+    tree["path"] = ""
     return tree
+
 
 
 def dir_tree(dir, root):
