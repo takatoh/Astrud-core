@@ -21,6 +21,7 @@ def list_photos(path):
     photo_dir = Config["photoDir"]
     p = Path(photo_dir) / path
     photos = [ str(x.relative_to(photo_dir)) for x in p.iterdir() if x.is_file() ]
+    photos.sort()
     dic = { "path" : path, "photos" : photos }
     return dic
 
