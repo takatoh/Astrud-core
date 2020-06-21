@@ -39,6 +39,7 @@ def send_photo(filepath):
     return static_file(filepath, root=Config["photoDir"], mimetype=mimetype)
 
 
+# Functions for internal use.
 
 def dir_tree(dir, root):
     p = Path(dir)
@@ -50,4 +51,5 @@ def dir_tree(dir, root):
 
 
 
-run(host="localhost", port=8008, debug=True)
+if __name__ == "__main__":
+    run(host="localhost", port=8008, debug=True)
