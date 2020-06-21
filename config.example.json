@@ -1,0 +1,4 @@
+{
+  "photoDir" : "/path/to/photos",
+  "thumbDir" : "/path/to/thumbnails"
+}
