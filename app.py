@@ -19,14 +19,14 @@ def config():
 
 @route("/tree")
 def tree():
-    tree = dir_tree(Config["photoDir"])
+    tree = dir_tree(Config["photoDir"], Config["photoDir"])
     return tree
 
 
-def dir_tree(root):
-    p = Path(root)
-    tree = { "name" : root }
-    tree["children"] = [ dir_tree(str(x)) for x in p.iterdir() if x.is_dir() ]
+def dir_tree(dir, root):
+    p = Path(dir)
+    tree = { "name" : str(p.name), "path" : str(p.relative_to(root)) }
+    tree["children"] = [ dir_tree(str(x), root) for x in p.iterdir() if x.is_dir() ]
     return tree
 
 
