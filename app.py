@@ -28,7 +28,7 @@ def tree():
 def list_photos(path):
     photo_dir = Config["photoDir"]
     p = Path(photo_dir) / path
-    make_thumbnails(str(p))
+    make_thumbnails(path)
     photos = [ str(x.relative_to(photo_dir)) for x in p.iterdir() if x.is_file() ]
     photos.sort()
     dic = { "path" : path, "photos" : photos }
@@ -53,19 +53,18 @@ def dir_tree(dir, root):
 
 
 def make_thumbnail(photo_path, thumb_path):
-    im = Image.open(photo_path)
-    im.thumbnail((180, 180))
-    im.save()
-    return thumb_path
+    print(thumb_path)
+    with Image.open(photo_path) as im:
+        im.thumbnail((180, 180))
+        im.save(thumb_path)
 
 
 def make_thumbnails(dir_path):
     photo_dir = Path(Config["photoDir"]) / dir_path
     thumb_dir = Path(Config["thumbDir"]) / dir_path
-    thumb_dir.mkdir(exist_ok=True)
+    thumb_dir.mkdir(parents=True, exist_ok=True)
     for p in photo_dir.iterdir():
-        if p.is_file():
-            make_thumbnail(p, thumb_dir / p.name)
+        make_thumbnail(str(p), str(thumb_dir / p.name))
 
 
 
