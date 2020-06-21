@@ -29,8 +29,12 @@ def list_photos(path):
     photo_dir = Config["photoDir"]
     p = Path(photo_dir) / path
     make_thumbnails(path)
-    photos = [ str(x.relative_to(photo_dir)) for x in p.iterdir() if x.is_file() ]
-    photos.sort()
+    photos = [ x.relative_to(photo_dir) for x in p.iterdir() if x.is_file() ]
+    photos = list(map(lambda p: {
+        "filename" : p.name,
+        "photo" : f"/photo/{str(p)}",
+        "thumbnail" : f"/thumbnail/{str(p)}"
+    }, sorted(photos)))
     dic = { "path" : path, "photos" : photos }
     return dic
 
