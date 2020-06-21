@@ -7,15 +7,6 @@ with open("config.json", "r") as f:
     Config = json.load(f)
 
 
-@route("/hello")
-def hello():
-    return "Hello World!"
-
-
-@route("/config")
-def config():
-    return json.dumps(Config, indent=2)
-
 
 @route("/tree")
 def tree():
