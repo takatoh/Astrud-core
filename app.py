@@ -3,6 +3,13 @@ import json
 from pathlib import Path
 
 
+MimeTypes = {
+    ".png" : "image/png",
+    ".jpeg" : "image/jpeg",
+    ".jpg" : "image/jpeg",
+    ".gif" : "image/gif"
+}
+
 with open("config.json", "r") as f:
     Config = json.load(f)
 
@@ -28,7 +35,9 @@ def list_photos(path):
 
 @route("/photo/<filepath:path>")
 def send_photo(filepath):
-    return static_file(filepath, root=Config["photoDir"], mimetype="image/jpeg")
+    mimetype = MimeTypes[Path(filepath).suffix]
+    return static_file(filepath, root=Config["photoDir"], mimetype=mimetype)
+
 
 
 def dir_tree(dir, root):
