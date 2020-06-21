@@ -1,6 +1,7 @@
 from bottle import route, static_file, run
 import json
 from pathlib import Path
+from PIL import Image
 
 
 MimeTypes = {
@@ -48,6 +49,13 @@ def dir_tree(dir, root):
     children.sort(key=lambda c: c["name"])
     tree["children"] = children
     return tree
+
+
+def make_thumbnail(photo_path, thumb_path):
+    im = Image.open(photo_path)
+    im.thumbnail((180, 180))
+    im.save()
+    return thumb_path
 
 
 
