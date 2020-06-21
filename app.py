@@ -41,6 +41,12 @@ def send_photo(filepath):
     return static_file(filepath, root=Config["photoDir"], mimetype=mimetype)
 
 
+@route("/thumbnail/<filepath:path>")
+def send_thumbnail(filepath):
+    mimetype = MimeTypes[Path(filepath).suffix]
+    return static_file(filepath, root=Config["thumbDir"], mimetype=mimetype)
+
+
 # Functions for internal use.
 
 def dir_tree(dir, root):
