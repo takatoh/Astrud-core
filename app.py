@@ -58,6 +58,15 @@ def make_thumbnail(photo_path, thumb_path):
     return thumb_path
 
 
+def make_thumbnails(dir_path):
+    photo_dir = Path(Config["photoDir"]) / dir_path
+    thumb_dir = Path(Config["thumbDir"]) / dir_path
+    thumb_dir.mkdir(exist_ok=True)
+    for p in photo_dir.iterdir():
+        if p.is_file():
+            make_thumbnail(p, thumb_dir / p.name)
+
+
 
 if __name__ == "__main__":
     run(host="localhost", port=8008, debug=True)
