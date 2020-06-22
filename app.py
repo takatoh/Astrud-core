@@ -20,7 +20,7 @@ with open("config.json", "r") as f:
 
 @route("/tree")
 def tree():
-    tree = dir_tree(Config["photoDir"], Config["photoDir"])
+    tree = dir_tree(Config["photoDir"])
     tree["name"] = None
     tree["path"] = ""
     return tree
@@ -54,10 +54,11 @@ def send_thumbnail(filepath):
 
 # Functions for internal use.
 
-def dir_tree(dir, root):
+def dir_tree(dir):
     p = Path(dir)
+    root = Config["photoDir"]
     tree = { "name" : str(p.name), "path" : str(p.relative_to(root)) }
-    children = [ dir_tree(str(x), root) for x in p.iterdir() if x.is_dir() ]
+    children = [ dir_tree(str(x)) for x in p.iterdir() if x.is_dir() ]
     children.sort(key=lambda c: c["name"])
     tree["children"] = children
     return tree
