@@ -31,7 +31,7 @@ def list_photos(path):
     photo_dir = Config["photoDir"]
     p = Path(photo_dir) / path
     make_thumbnails(path)
-    photos = [ x.relative_to(photo_dir) for x in p.iterdir() if x.is_file() ]
+    photos = [ x.relative_to(photo_dir) for x in p.iterdir() if is_photo(x) ]
     photos = list(map(lambda p: {
         "filename" : p.name,
         "photo" : f"/photo/{str(p)}",
@@ -64,6 +64,8 @@ def dir_tree(dir, root):
 
 
 def make_thumbnail(photo_path, thumb_path):
+    if not is_photo(Path(photo_path)):
+        return None
     if not Path(thumb_path).exists():
         with Image.open(photo_path) as im:
             im.thumbnail(ThumbnailSize)
@@ -79,6 +81,10 @@ def make_thumbnails(dir_path):
     thumb_dir.mkdir(parents=True, exist_ok=True)
     for p in photo_dir.iterdir():
         make_thumbnail(str(p), str(thumb_dir / p.name))
+
+
+def is_photo(filepath):
+    return filepath.is_file() and filepath.suffix in MimeTypes
 
 
 
