@@ -56,8 +56,7 @@ def send_thumbnail(filepath):
 
 def dir_tree(dir):
     p = Path(dir)
-    root = Config["photoDir"]
-    tree = { "name" : str(p.name), "path" : str(p.relative_to(root)) }
+    tree = { "name" : str(p.name), "path" : str(p.relative_to(Config["photoDir"])) }
     children = [ dir_tree(str(x)) for x in p.iterdir() if x.is_dir() ]
     children.sort(key=lambda c: c["name"])
     tree["children"] = children
