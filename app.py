@@ -65,8 +65,6 @@ def dir_tree(dir):
 
 
 def make_thumbnail(photo_path, thumb_path):
-    if not is_photo(Path(photo_path)):
-        return None
     if not Path(thumb_path).exists():
         with Image.open(photo_path) as im:
             im.thumbnail(ThumbnailSize)
@@ -81,6 +79,8 @@ def make_thumbnails(dir_path):
     thumb_dir = Path(Config["thumbDir"]) / dir_path
     thumb_dir.mkdir(parents=True, exist_ok=True)
     for p in photo_dir.iterdir():
+        if not is_photo(p):
+            continue
         make_thumbnail(str(p), str(thumb_dir / p.name))
 
 
