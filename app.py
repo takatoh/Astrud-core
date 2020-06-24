@@ -69,9 +69,6 @@ def make_thumbnail(photo_path, thumb_path):
         with Image.open(photo_path) as im:
             im.thumbnail(ThumbnailSize)
             im.save(thumb_path)
-        return thumb_path
-    else:
-        return None
 
 
 def make_thumbnails(dir_path):
