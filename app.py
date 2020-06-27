@@ -34,8 +34,8 @@ def list_photos(path):
     photos = [ x.relative_to(photo_dir) for x in p.iterdir() if is_photo(x) ]
     photos = list(map(lambda p: {
         "filename" : p.name,
-        "photo" : f"/photo/{str(p)}",
-        "thumbnail" : f"/thumbnail/{str(p)}"
+        "photo" : f"photo/{str(p)}",
+        "thumbnail" : f"thumbnail/{str(p)}"
     }, sorted(photos)))
     return { "path" : path, "photos" : photos }
 
