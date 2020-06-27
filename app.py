@@ -1,4 +1,4 @@
-from bottle import route, static_file, run
+from bottle import route, static_file, hook, response, run
 import json
 from pathlib import Path
 from PIL import Image
@@ -21,7 +21,7 @@ with open("config.json", "r") as f:
 @route("/tree")
 def tree():
     tree = dir_tree(Config["photoDir"])
-    tree["name"] = None
+    tree["name"] = "(root)"
     tree["path"] = ""
     return tree
 
@@ -50,6 +50,11 @@ def send_photo(filepath):
 def send_thumbnail(filepath):
     mimetype = MimeTypes[Path(filepath).suffix]
     return static_file(filepath, root=Config["thumbDir"], mimetype=mimetype)
+
+
+@hook("after_request")
+def enable_cros():
+    response.headers['Access-Control-Allow-Origin'] = '*'
 
 
 # Functions for internal use.
