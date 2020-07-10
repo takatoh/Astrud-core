@@ -20,7 +20,7 @@ with open("config.json", "r") as f:
 
 @route("/tree")
 def tree():
-    tree = dir_tree(Config["photoDir"])
+    tree = dir_tree(Path(Config["photoDir"]))
     tree["name"] = "(root)"
     tree["path"] = ""
     return tree
@@ -60,8 +60,6 @@ def enable_cros():
 # Functions for internal use.
 
 def dir_tree(p):
-    if not isinstance(p, Path):
-        p = Path(p)
     tree = { "name" : str(p.name), "path" : str(p.relative_to(Config["photoDir"])) }
     children = [ dir_tree(x) for x in p.iterdir() if x.is_dir() ]
     children.sort(key=lambda c: c["name"])
