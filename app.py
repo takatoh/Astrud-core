@@ -1,4 +1,4 @@
-from bottle import route, static_file, hook, response, run
+from bottle import route, static_file, hook, response, run, default_app
 import json
 from pathlib import Path
 from PIL import Image
