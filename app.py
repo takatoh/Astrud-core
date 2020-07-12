@@ -91,3 +91,5 @@ def is_photo(filepath):
 
 if __name__ == "__main__":
     run(host="localhost", port=8008, debug=True)
+else:
+    application = default_app()
