@@ -79,9 +79,8 @@ def make_thumbnails(dir_path):
     thumb_dir = Path(Config["thumbDir"]) / dir_path
     thumb_dir.mkdir(parents=True, exist_ok=True)
     for p in photo_dir.iterdir():
-        if not is_photo(p):
-            continue
-        make_thumbnail(str(p), str(thumb_dir / p.name))
+        if is_photo(p):
+            make_thumbnail(str(p), str(thumb_dir / p.name))
 
 
 def is_photo(filepath):
