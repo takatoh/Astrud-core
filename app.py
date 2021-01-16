@@ -60,11 +60,22 @@ def enable_cros():
 # Functions for internal use.
 
 def dir_tree(p):
-    tree = { "name" : str(p.name), "path" : str(p.relative_to(Config["photoDir"])) }
+    tree = {
+        "name" : str(p.name),
+        "path" : str(p.relative_to(Config["photoDir"])),
+        "hasPhotos" : has_photos(p)
+    }
     children = [ dir_tree(x) for x in p.iterdir() if x.is_dir() ]
     children.sort(key=lambda c: c["name"])
     tree["children"] = children
     return tree
+
+
+def has_photos(path):
+    for c in path.iterdir():
+        if is_photo(c):
+            return True
+    return False
 
 
 def make_thumbnail(photo_path, thumb_path):
