@@ -8,7 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.8"
 bottle = "^0.12.19"
-Pillow = "^8.1.2"
+Pillow = "^9.0.1"
 
 [tool.poetry.dev-dependencies]
 
