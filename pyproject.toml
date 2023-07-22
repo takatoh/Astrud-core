@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "astrud-core"
-version = "0.2.2"
+version = "0.3.0"
 description = "Astrud API server."
 authors = ["takatoh <takatoh.m@gmail.com>"]
 license = "MIT"
