@@ -54,7 +54,7 @@ def send_thumbnail(filepath):
 
 @hook("after_request")
 def enable_cros():
-    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers["Access-Control-Allow-Origin"] = "*"
 
 
 # Functions for internal use.
