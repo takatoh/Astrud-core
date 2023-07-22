@@ -91,7 +91,7 @@ def make_thumbnails(dir_path):
     thumb_dir.mkdir(parents=True, exist_ok=True)
     for p in photo_dir.iterdir():
         if is_photo(p):
-            make_thumbnail(p, thumb_dir / p.name)
+            make_thumbnail(p, thumb_dir / (p.stem + ".jpg"))
 
 
 def is_photo(filepath):
