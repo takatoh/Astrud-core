@@ -35,7 +35,7 @@ def list_photos(path):
     photos = list(map(lambda p: {
         "filename" : p.name,
         "photo" : f"photo/{str(p)}",
-        "thumbnail" : f"thumbnail/{str(p)}"
+        "thumbnail" : f"thumbnail/{str(p.parent / p.stem)}.jpg"
     }, sorted(photos)))
     return { "path" : path, "photos" : photos }
 
@@ -82,7 +82,7 @@ def make_thumbnail(photo_path, thumb_path):
     if not thumb_path.exists():
         with Image.open(photo_path) as im:
             im.thumbnail(ThumbnailSize)
-            im.save(thumb_path)
+            im.convert("RGB").save(thumb_path)
 
 
 def make_thumbnails(dir_path):
