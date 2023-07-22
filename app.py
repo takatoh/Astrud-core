@@ -79,7 +79,7 @@ def has_photos(path):
 
 
 def make_thumbnail(photo_path, thumb_path):
-    if not Path(thumb_path).exists():
+    if not thumb_path.exists():
         with Image.open(photo_path) as im:
             im.thumbnail(ThumbnailSize)
             im.save(thumb_path)
@@ -91,7 +91,7 @@ def make_thumbnails(dir_path):
     thumb_dir.mkdir(parents=True, exist_ok=True)
     for p in photo_dir.iterdir():
         if is_photo(p):
-            make_thumbnail(str(p), str(thumb_dir / p.name))
+            make_thumbnail(p, thumb_dir / p.name)
 
 
 def is_photo(filepath):
