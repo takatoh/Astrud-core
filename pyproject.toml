@@ -6,9 +6,9 @@ authors = ["takatoh <takatoh.m@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
-bottle = "^0.12.20"
-Pillow = "^10.3.0"
+python = "^3.12"
+bottle = "^0.13.0"
+Pillow = "^11.0.0"
 
 [tool.poetry.dev-dependencies]
 
